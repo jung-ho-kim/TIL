@@ -16,7 +16,7 @@ python -m ipykernel install --user --name django --display-name "Python Django"
 conda install -c conda-forge jupyterlab
 ```
 
-
+`conda remove --name tensorflow35 --all` 가상환경 삭제
 
 ```powershell
 -------Facebook Prophet-----
