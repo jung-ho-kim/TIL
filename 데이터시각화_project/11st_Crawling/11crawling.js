@@ -3,6 +3,15 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+for() {
+
+  for (20)
+    리스트에 리뷰저장
+1 if() 더보기를 몇번 누를것인가
+
+}
+
+
 // 쿠팡 리뷰 데이터 크롤링 함수
 async function getReviewsData(numOfReviews) {
   // 리뷰객체들이 저장될 배열
@@ -83,7 +92,7 @@ async function getReviewsData(numOfReviews) {
   function clickNextPageButton(i) {
     document
       .querySelector(
-        `#btfTab > ul.tab-contents > li.product-review > div > div.sdp-review__article.js_reviewArticleContainer > section.js_reviewArticleListContainer > div.sdp-review__article__page.js_reviewArticlePagingContainer > button:nth-child(${i})`
+        `#review-list-page-area > div > button`
       )
       .click();
   }
@@ -101,39 +110,39 @@ async function getReviewsData(numOfReviews) {
       reviewData.text = getTextFromReview(value);
     } catch (e) {
       console.log(e);
-      reviewData.text = "";
+      reviewData.text = "#review-list-page-area > ul > li:nth-child(1) > div > div > div.cont_text_wrap > p.cont_text";
     }
 
     return reviewData;
     
     function getTextFromReview(value) {
       return reviews[value].querySelector(
-        "div.sdp-review__article__list__review.js_reviewArticleContentContainer > div"
+        "#review-list-page-area > ul > li:nth-child(1) > div > div > div.cont_text_wrap > p.cont_text"
       ).textContent;
     }
     
     function getRatingFromReview(value) {
       return reviews[value].querySelector(
-        "div.sdp-review__article__list__info > div.sdp-review__article__list__info__product-info > div.sdp-review__article__list__info__product-info__star-gray > div"
+        "#review-list-page-area > ul > li:nth-child(1) > div > p.grade > span > em"
       ).dataset.rating;
     }
-    
+    // #review-list-page-area > ul:nth-child(7) > li:nth-child(1) > div > div > div.cont_text_wrap > p
     function getDateFromReview(value) {
       return reviews[value].querySelector(
-        "div.sdp-review__article__list__info > div.sdp-review__article__list__info__product-info > div.sdp-review__article__list__info__product-info__reg-date"
+        "#review-list-page-area > ul > li:nth-child(1) > div > p.side > span"
       ).textContent;
     }
     
     function getNameFromReview(value) {
       return reviews[value].querySelector(
-        "div.sdp-review__article__list__info > div.sdp-review__article__list__info__user > span"
+        "#review-list-page-area > ul > li:nth-child(1) > dl > dt"
       ).textContent;
     }
   }
 
   function getReviewsFromHTML() {
     return document.querySelectorAll(
-      "#btfTab > ul.tab-contents > li.product-review > div > div.sdp-review__article.js_reviewArticleContainer > section.js_reviewArticleListContainer > article"
+      "#review-list-page-area > ul > li:nth-child(1)"
     );
   }
 
@@ -181,4 +190,4 @@ function getJSONFile(numOfReviews) {
   });
 }
 
-getJSONFile(300)
+getJSONFile(100)
