@@ -24,48 +24,50 @@ async function getReviewsData(numOfReviews) {
       fiveReviewIndex
     );
 
-    // 리뷰 5개씩 반복하는 반복문
-    for (let i = 3; i < fiveReviewIndex; i++) {
-      // 리뷰 5개를 담고있는 article 태그 리스트 가져오기
-      try {
-        reviews = getReviewsFromHTML();
-      } catch (e) {
-        console.log(e);
-        return reviewList;
-      }
-    
-      // NodeList => Array
-      reviews_arr = Array.prototype.slice.call(reviews);
-    
-      // 리뷰개수를 5로 나눈 나머지만큼의 반복을 위한 변수
-      let lastReviewsCount = 0;
-    
-      // 리뷰 Array 반복
-      for (value in reviews_arr) {
-        // 리뷰 개수를 5로 나눈 나머지 만큼 반복
-        if (isLastLoop(j, i)) {
-          lastReviewsCount++;
-        }
-    
-        if (isLastElement(lastReviewsCount)) {
-          break;
-        }
-    
-        //배열에 리뷰객체 저장
-        reviewList.push(createReviewDataObject(reviews, value));
-      }
-    
-      //2초 대기
-      await sleep(1000);
-      // 다음 페이지 버튼 클릭
-      try {
-        clickNextPageButton(i);
-      } catch (e) {
-        console.log(e);
-        return reviewList;
-      }
-      await sleep(1000);
+```javascript
+// 리뷰 5개씩 반복하는 반복문
+for (let i = 3; i < fiveReviewIndex; i++) {
+  // 리뷰 5개를 담고있는 article 태그 리스트 가져오기
+  try {
+    reviews = getReviewsFromHTML();
+  } catch (e) {
+    console.log(e);
+    return reviewList;
+  }
+
+  // NodeList => Array
+  reviews_arr = Array.prototype.slice.call(reviews);
+
+  // 리뷰개수를 5로 나눈 나머지만큼의 반복을 위한 변수
+  let lastReviewsCount = 0;
+
+  // 리뷰 Array 반복
+  for (value in reviews_arr) {
+    // 리뷰 개수를 5로 나눈 나머지 만큼 반복
+    if (isLastLoop(j, i)) {
+      lastReviewsCount++;
     }
+
+    if (isLastElement(lastReviewsCount)) {
+      break;
+    }
+
+    //배열에 리뷰객체 저장
+    reviewList.push(createReviewDataObject(reviews, value));
+  }
+
+  //2초 대기
+  await sleep(1000);
+  // 다음 페이지 버튼 클릭
+  try {
+    clickNextPageButton(i);
+  } catch (e) {
+    console.log(e);
+    return reviewList;
+  }
+  await sleep(1000);
+}
+```
   }
 
   return reviewList;
@@ -104,31 +106,33 @@ async function getReviewsData(numOfReviews) {
       reviewData.text = "";
     }
 
-    return reviewData;
-    
-    function getTextFromReview(value) {
-      return reviews[value].querySelector(
-        "div.sdp-review__article__list__review.js_reviewArticleContentContainer > div"
-      ).textContent;
-    }
-    
-    function getRatingFromReview(value) {
-      return reviews[value].querySelector(
-        "div.sdp-review__article__list__info > div.sdp-review__article__list__info__product-info > div.sdp-review__article__list__info__product-info__star-gray > div"
-      ).dataset.rating;
-    }
-    
-    function getDateFromReview(value) {
-      return reviews[value].querySelector(
-        "div.sdp-review__article__list__info > div.sdp-review__article__list__info__product-info > div.sdp-review__article__list__info__product-info__reg-date"
-      ).textContent;
-    }
-    
-    function getNameFromReview(value) {
-      return reviews[value].querySelector(
-        "div.sdp-review__article__list__info > div.sdp-review__article__list__info__user > span"
-      ).textContent;
-    }
+```javascript
+return reviewData;
+
+function getTextFromReview(value) {
+  return reviews[value].querySelector(
+    "div.sdp-review__article__list__review.js_reviewArticleContentContainer > div"
+  ).textContent;
+}
+
+function getRatingFromReview(value) {
+  return reviews[value].querySelector(
+    "div.sdp-review__article__list__info > div.sdp-review__article__list__info__product-info > div.sdp-review__article__list__info__product-info__star-gray > div"
+  ).dataset.rating;
+}
+
+function getDateFromReview(value) {
+  return reviews[value].querySelector(
+    "div.sdp-review__article__list__info > div.sdp-review__article__list__info__product-info > div.sdp-review__article__list__info__product-info__reg-date"
+  ).textContent;
+}
+
+function getNameFromReview(value) {
+  return reviews[value].querySelector(
+    "div.sdp-review__article__list__info > div.sdp-review__article__list__info__user > span"
+  ).textContent;
+}
+```
   }
 
   function getReviewsFromHTML() {
