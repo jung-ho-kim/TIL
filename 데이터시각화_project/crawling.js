@@ -24,7 +24,7 @@ async function getReviewsData(numOfReviews) {
       fiveReviewIndex
     );
 
-```javascript
+
 // 리뷰 5개씩 반복하는 반복문
 for (let i = 3; i < fiveReviewIndex; i++) {
   // 리뷰 5개를 담고있는 article 태그 리스트 가져오기
@@ -67,7 +67,7 @@ for (let i = 3; i < fiveReviewIndex; i++) {
   }
   await sleep(1000);
 }
-```
+
   }
 
   return reviewList;
@@ -106,7 +106,7 @@ for (let i = 3; i < fiveReviewIndex; i++) {
       reviewData.text = "";
     }
 
-```javascript
+
 return reviewData;
 
 function getTextFromReview(value) {
@@ -132,7 +132,7 @@ function getNameFromReview(value) {
     "div.sdp-review__article__list__info > div.sdp-review__article__list__info__user > span"
   ).textContent;
 }
-```
+
   }
 
   function getReviewsFromHTML() {

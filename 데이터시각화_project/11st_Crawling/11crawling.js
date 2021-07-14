@@ -3,15 +3,6 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-for() {
-
-  for (20)
-    리스트에 리뷰저장
-1 if() 더보기를 몇번 누를것인가
-
-}
-
-
 // 쿠팡 리뷰 데이터 크롤링 함수
 async function getReviewsData(numOfReviews) {
   // 리뷰객체들이 저장될 배열
@@ -65,7 +56,7 @@ async function getReviewsData(numOfReviews) {
       }
     
       //2초 대기
-      await sleep(1000);
+      await sleep(700);
       // 다음 페이지 버튼 클릭
       try {
         clickNextPageButton(i);
@@ -73,8 +64,9 @@ async function getReviewsData(numOfReviews) {
         console.log(e);
         return reviewList;
       }
-      await sleep(1000);
+      await sleep(700);
     }
+
   }
 
   return reviewList;
@@ -92,7 +84,7 @@ async function getReviewsData(numOfReviews) {
   function clickNextPageButton(i) {
     document
       .querySelector(
-        `#review-list-page-area > div > button`
+        '#review-list-page-area > div > button'
       )
       .click();
   }
@@ -110,39 +102,40 @@ async function getReviewsData(numOfReviews) {
       reviewData.text = getTextFromReview(value);
     } catch (e) {
       console.log(e);
-      reviewData.text = "#review-list-page-area > ul > li:nth-child(1) > div > div > div.cont_text_wrap > p.cont_text";
+      reviewData.text = "";
     }
 
     return reviewData;
     
     function getTextFromReview(value) {
       return reviews[value].querySelector(
-        "#review-list-page-area > ul > li:nth-child(1) > div > div > div.cont_text_wrap > p.cont_text"
+        `#review-list-page-area > ul:nth-child(${j}) > li:nth-child(${i}) > dl > dt`
       ).textContent;
     }
     
     function getRatingFromReview(value) {
       return reviews[value].querySelector(
-        "#review-list-page-area > ul > li:nth-child(1) > div > p.grade > span > em"
+        `#review-list-page-area > ul:nth-child(${j}) > li:nth-child(${i}) > div > p.grade > span > em`
       ).dataset.rating;
     }
-    // #review-list-page-area > ul:nth-child(7) > li:nth-child(1) > div > div > div.cont_text_wrap > p
+    
     function getDateFromReview(value) {
       return reviews[value].querySelector(
-        "#review-list-page-area > ul > li:nth-child(1) > div > p.side > span"
+        `#review-list-page-area > ul:nth-child(${j}) > li:nth-child(${i}) > div > p.side > span`
       ).textContent;
     }
     
     function getNameFromReview(value) {
       return reviews[value].querySelector(
-        "#review-list-page-area > ul > li:nth-child(1) > dl > dt"
+        `#review-list-page-area > ul:nth-child(${j}) > li:nth-child(${i}) > div > div > div.cont_text_wrap > p`
       ).textContent;
     }
+
   }
 
   function getReviewsFromHTML() {
     return document.querySelectorAll(
-      "#review-list-page-area > ul > li:nth-child(1)"
+      `#review-list-page-area > ul:nth-child(${j}) > li:nth-child(${i})`
     );
   }
 
@@ -163,6 +156,7 @@ async function getReviewsData(numOfReviews) {
       }
       return parseInt(((numOfReviews - 1) % 50) / 5) + 1 + 3;
     }
+
   }
 
   function getFiveReviewIndex(fiftyReviewIndex) {
@@ -190,4 +184,4 @@ function getJSONFile(numOfReviews) {
   });
 }
 
-getJSONFile(100)
+
