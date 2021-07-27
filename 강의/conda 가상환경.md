@@ -50,4 +50,3 @@ https://www.kaggle.com/junghok/covid-19-the-story-of-the-vaccines/edit
 시계열 분석
 
 강의파일 -> KOSA -> uncertain -> TS1, 3-holiday
-
