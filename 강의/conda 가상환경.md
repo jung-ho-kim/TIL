@@ -41,6 +41,8 @@ conda 삭제
 
 https://nomad-programmer.tistory.com/17
 
+
+
 파이썬 지도 그릴때 참고
 
 https://www.kaggle.com/junghok/covid-19-the-story-of-the-vaccines/edit
